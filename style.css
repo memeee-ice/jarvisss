@@ -1,0 +1,205 @@
+:root {
+    --hud-red: #ff0055;
+    --hud-glow: #ff2a6d;
+    --hud-bg: #0d0206;
+    --glass-panel: rgba(45, 5, 20, 0.65);
+    --glass-border: rgba(255, 0, 85, 0.4);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+body, html {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--hud-bg);
+    color: var(--hud-red);
+    overflow: hidden;
+}
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.hud-container {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    gap: 15px;
+    pointer-events: none;
+}
+
+.hud-container > * {
+    pointer-events: auto;
+}
+
+.glass-panel {
+    background: var(--glass-panel);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.panel-header {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 8px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--hud-red);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--hud-red);
+}
+
+.stat-group label {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--hud-glow);
+    margin-bottom: 4px;
+}
+
+.bar-container {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 0, 85, 0.1);
+    border: 1px solid var(--glass-border);
+    border-radius: 3px;
+}
+
+.bar-fill.red {
+    background: var(--hud-red);
+    box-shadow: 0 0 10px var(--hud-red);
+}
+
+.action-btn {
+    background: rgba(255, 0, 85, 0.15);
+    border: 1px solid var(--hud-red);
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: 0.2s ease;
+}
+
+.action-btn:hover {
+    background: var(--hud-red);
+    box-shadow: 0 0 12px var(--hud-red);
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.status-text {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.hud-log {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: auto;
+}
+
+.center-hud {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dashed var(--hud-red);
+    pointer-events: none;
+}
+
+.outer-ring-1 {
+    width: 280px;
+    height: 280px;
+    animation: rotateClockwise 20s linear infinite;
+}
+
+.outer-ring-2 {
+    width: 220px;
+    height: 220px;
+    border: 1px solid var(--hud-glow);
+    border-top: 2px solid transparent;
+    animation: rotateCounter 12s linear infinite;
+}
+
+.voice-trigger {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    cursor: pointer;
+}
+
+.core-glow {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 10px auto;
+    background: radial-gradient(circle, var(--hud-red) 0%, rgba(255,0,85,0) 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 25px var(--hud-red);
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes rotateClockwise {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rotateCounter {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 0.5; transform: scale(0.95); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+@media (max-width: 768px) {
+    .hud-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        overflow-y: auto;
+    }
+}

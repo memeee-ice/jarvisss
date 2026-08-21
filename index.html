@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K.A.R.E.N. AI Interface</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="hud-container">
+        
+        <!-- Left Panel: Diagnostics & Phone Sync -->
+        <div class="glass-panel left-panel">
+            <div class="panel-header">
+                <span class="status-dot"></span>
+                K.A.R.E.N. PROTOCOL v2.6
+            </div>
+            <div class="stat-group">
+                <label>SYSTEM LOAD</label>
+                <div class="bar-container"><div class="bar-fill red" style="width: 42%;"></div></div>
+            </div>
+            
+            <button class="action-btn" onclick="connectPhone()">
+                📱 PAIR PHONE VIA BLUETOOTH
+            </button>
+            <div id="phone-status" class="status-text">PHONE: DISCONNECTED</div>
+
+            <div class="hud-log" id="hud-log">
+                <p>> Suit Diagnostics: OK</p>
+                <p>> K.A.R.E.N. Online bestie!</p>
+            </div>
+        </div>
+
+        <!-- Center HUD Assembly -->
+        <div class="center-hud">
+            <div class="ring outer-ring-1"></div>
+            <div class="ring outer-ring-2"></div>
+            
+            <div class="voice-trigger" onclick="toggleListening()">
+                <div class="core-glow"></div>
+                <span id="voice-status">CLICK TO TALK TO K.A.R.E.N.</span>
+            </div>
+        </div>
+
+        <!-- Right Panel: App Launchers -->
+        <div class="glass-panel right-panel">
+            <div class="panel-header">
+                <span class="status-dot cyan-dot"></span>
+                APP CONTROLS
+            </div>
+            <div class="btn-grid">
+                <button class="action-btn" onclick="openApp('https://youtube.com')">▶ YouTube</button>
+                <button class="action-btn" onclick="openApp('https://google.com')">🔍 Search</button>
+                <button class="action-btn" onclick="openApp('https://github.com')">💻 Code</button>
+                <button class="action-btn" onclick="openApp('https://spotify.com')">🎵 Music</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
